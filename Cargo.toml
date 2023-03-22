@@ -1,0 +1,29 @@
+[package]
+name = "opentelemetry-hyper-http"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+[[bin]] # Bin to run the http server
+name = "http-server"
+path = "src/server.rs"
+doc = false
+
+[[bin]] # Bin to run the client
+name = "http-client"
+path = "src/client.rs"
+doc = false
+
+[[bin]] # Bin to run the client
+name = "http-client-wo-span"
+path = "src/client_wo_span.rs"
+doc = false
+
+[dependencies]
+hyper = { version = "0.14.25", features = ["server"] }
+opentelemetry = { version = "0.18.0", features = ["rt-tokio"] }
+opentelemetry-contrib = { version = "0.10.0", features = ["rt-tokio", "jaeger_json_exporter"] }
+opentelemetry-http = { version = "0.7.0", features = ["hyper", "tokio"] }
+tokio = { version = "1.26.0", default-features = false, features = ["rt-multi-thread", "macros"] }
